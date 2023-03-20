@@ -47,7 +47,7 @@ def fit_predict_logit(
         return preds, logreg
 
 
-def evaluate_models(hdf, model_formulas):
+def evaluate_models(hdf: pd.DataFrame, model_formulas: list[tuple[str, str]], target_name: str = "covid_death"):
     """
     Evaluate a set of model parameterizations, returning a list of summary statistics for each model.
 
@@ -73,7 +73,7 @@ def evaluate_models(hdf, model_formulas):
                         y_score[test_index] = preds
                     except Exception:
                         y_score[test_index] = 0  # default to a majority-class prediction
-                y_true = hdf.covid_death
+                y_true = hdf[target_name]
                 y_pred = (y_score >= 0.5).astype(int)
                 f1_death = sklearn.metrics.f1_score(y_true, y_pred)
                 roc_auc = sklearn.metrics.roc_auc_score(y_true, y_score)
