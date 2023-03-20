@@ -1,19 +1,22 @@
-import numpy as np
-
 import warnings
+
+import numpy as np
+import sklearn
+import sklearn.linear_model
+import sklearn.model_selection
+import statsmodels.formula.api as smf
 from tqdm import tqdm
 
-import sklearn
-import sklearn.model_selection
-import sklearn.linear_model
 
-import statsmodels.formula.api as smf
-
-
-def fit_predict_logit(train_df, test_df, formula="covid_death ~ gender + race + age", l2=False):
+def fit_predict_logit(
+    train_df,
+    test_df,
+    formula="covid_death ~ gender + race + age",
+    l2=False,
+):
     """
     Fits a logistic regression model given the train/test dataframes and a particular formula.
-    
+
     If L2 regularization is active, we use sklearn rather than statsmodels.
     """
     md = smf.logit(formula=formula, data=train_df)
@@ -22,16 +25,16 @@ def fit_predict_logit(train_df, test_df, formula="covid_death ~ gender + race + 
         preds = res.predict(test_df)
         return preds, res
     else:
-        logreg = sklearn.linear_model.LogisticRegression(fit_intercept=False, solver='liblinear')
+        logreg = sklearn.linear_model.LogisticRegression(fit_intercept=False, solver="liblinear")
         logreg.fit(md.exog, md.endog)
         preds = logreg.predict(smf.logit(formula=formula, data=test_df).exog)
         return preds, logreg
-    
-    
+
+
 def evaluate_models(hdf, model_formulas):
     """
     Evaluate a set of model parameterizations, returning a list of summary statistics for each model.
-    
+
     :hdf - The hospitalizations dataframe; see `covid_modeling.io`.
     :model_formulas - a list of (model_name, model_formula) tuples. model_formula uses Patsy syntax, to be passed directly to `statsmodels.formula.api.logit`.
     """
@@ -52,16 +55,18 @@ def evaluate_models(hdf, model_formulas):
                     try:
                         preds, _ = fit_predict_logit(train_df, test_df, formula=model_formula, l2=l2)
                         y_score[test_index] = preds
-                    except:
+                    except Exception:
                         y_score[test_index] = 0  # default to a majority-class prediction
                 y_true = hdf.covid_death
                 y_pred = (y_score >= 0.5).astype(int)
                 f1_death = sklearn.metrics.f1_score(y_true, y_pred)
                 roc_auc = sklearn.metrics.roc_auc_score(y_true, y_score)
-                results.append({
-                    'model_name': model_name,
-                    'l2': l2,
-                    'f1': f1_death,
-                    'roc_auc': roc_auc,
-                })
+                results.append(
+                    {
+                        "model_name": model_name,
+                        "l2": l2,
+                        "f1": f1_death,
+                        "roc_auc": roc_auc,
+                    },
+                )
     return results
