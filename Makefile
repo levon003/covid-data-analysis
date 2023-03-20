@@ -26,3 +26,6 @@ install-poetry:
 install-precommits:
 	@poetry run pre-commit autoupdate
 	@poetry run pre-commit install --overwrite --install-hooks
+
+test:
+	@poetry run pytest
