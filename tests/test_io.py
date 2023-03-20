@@ -1,3 +1,5 @@
+import pathlib
+
 import pytest
 
 import covid_modeling.io
@@ -5,7 +7,7 @@ import covid_modeling.io
 
 def test_DataLoader(pytestconfig):
     with pytest.raises(ValueError):
-        covid_modeling.io.DataLoader("fake_path")
+        covid_modeling.io.DataLoader(pathlib.Path("fake_path"))
 
     test_data_dir = pytestconfig.rootpath / "tests" / "resources"
     dl = covid_modeling.io.DataLoader(test_data_dir)

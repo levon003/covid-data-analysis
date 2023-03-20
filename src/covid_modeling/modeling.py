@@ -22,13 +22,13 @@ def fit_predict_logit(
     Parameters
     ----------
     train_df : pd.DataFrame
-        _description_
+        Training data
     test_df : pd.DataFrame
-        _description_
+        Testing data, with the same columns as train_df
     formula : str, optional
-        _description_, by default "covid_death ~ gender + race + age"
+        Modeling formula to use, by default "covid_death ~ gender + race + age"
     l2 : bool, optional
-        _description_, by default False
+        If l2 regularization should be used, by default False
 
     Returns
     -------
@@ -47,12 +47,28 @@ def fit_predict_logit(
         return preds, logreg
 
 
-def evaluate_models(hdf: pd.DataFrame, model_formulas: list[tuple[str, str]], target_name: str = "covid_death"):
+def evaluate_models(
+    hdf: pd.DataFrame,
+    model_formulas: list[tuple[str, str]],
+    target_name: str = "covid_death",
+) -> list[dict]:
     """
     Evaluate a set of model parameterizations, returning a list of summary statistics for each model.
 
-    :hdf - The hospitalizations dataframe; see `covid_modeling.io`.
-    :model_formulas - a list of (model_name, model_formula) tuples. model_formula uses Patsy syntax, to be passed directly to `statsmodels.formula.api.logit`.
+    Parameters
+    ----------
+    hdf : pd.DataFrame
+        Dataframe to evaluate, presumed to be the hospitalizations dataframe (see `covid_modeling.io`).
+    model_formulas : list[tuple[str, str]]
+        List of (model_name, model_formula) tuples. model_formula uses Patsy syntax, to be passed directly to `statsmodels.formula.api.logit`.
+    target_name : str, optional
+        The column we are predicting, by default "covid_death"
+
+    Returns
+    -------
+    list[dict]
+        List of dictionaries with metadata recorded for each model.
+        Keys: model_name, l2, f1, roc_auc
     """
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")

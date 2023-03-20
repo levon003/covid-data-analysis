@@ -6,8 +6,9 @@ Basic modeling with Real-World Data.
 
 The data is a sample of research data provided by ConcertAI. I don't have permission to share it publicly. Note that all PII is random in the data (e.g. names and addresses are random).
 
+The structure of the data is visible in the analysis notebooks, and a sample is contained in the test resources (`tests/resources/`).
 
-### Poetry
+### Installation
 
 This repository uses `poetry` as its package manager, coordinated by `make`.
 

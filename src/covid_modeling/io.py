@@ -1,4 +1,4 @@
-import os
+import pathlib
 from datetime import datetime
 
 import dateutil.relativedelta
@@ -9,15 +9,23 @@ import pandas as pd
 class DataLoader:
     """
     Offers convenience functions for loading a defined set of patients and encounters data.
-
     """
 
-    def __init__(self, data_dir):
+    def __init__(self, data_dir: pathlib.Path):
         """
-        :data_dir - The directory in which the expected CSV files are located.
+
+        Parameters
+        ----------
+        data_dir : pathlib.Path
+            The directory in which the expected CSV files are located.
+
+        Raises
+        ------
+        ValueError
+            If the data_dir does not exist.
         """
         self.data_dir = data_dir
-        if not os.path.exists(data_dir):
+        if not data_dir.exists():
             raise ValueError(f"Directory '{data_dir}' does not exist.")
         self.pdf = None
         self.edf = None
@@ -27,8 +35,8 @@ class DataLoader:
         self._process_data()
 
     def _load_data(self):
-        self.pdf = pd.read_csv(os.path.join(self.data_dir, "patients.csv"))
-        self.edf = pd.read_csv(os.path.join(self.data_dir, "encounters.csv"))
+        self.pdf = pd.read_csv(self.data_dir / "patients.csv")
+        self.edf = pd.read_csv(self.data_dir / "encounters.csv")
 
     def _process_data(self):
         """
@@ -45,18 +53,20 @@ class DataLoader:
         self.edf["STARTDATE"] = self.edf.START.map(lambda date_str: datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ"))
         self.edf["STOPDATE"] = self.edf.STOP.map(lambda date_str: datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ"))
 
-    def get_covid_hospitalizations_dataframe(self):
-        """
-        :returns The COVID-19 hospitalizations data, computing it from the raw data if necessary.
+    def get_covid_hospitalizations_dataframe(self) -> pd.DataFrame:
+        """Compute the  COVID-19 hospitalizations data, computing it from the raw data if not yet cached.
+
+        Returns
+        -------
+        pd.DataFrame
+            The COVID-19 hospitalizations dataframe.
         """
         if self.hdf is None:
             self._compute_covid_hospitalizations_dataframe()
         return self.hdf
 
     def _compute_covid_hospitalizations_dataframe(self):
-        """
-        Note: 'magic numbers' in the implementation are explained and produced in the `DataExploration` notebook.
-        """
+        """Note: 'magic numbers' in the implementation are explained and produced in the `DataExploration` notebook."""
         covid_code = 840539006
         death_cert_code = 308646001
         nonhospitalization_codes = [310061009, 56876005, 183495009, 305411003, 67799006, 185389009]
