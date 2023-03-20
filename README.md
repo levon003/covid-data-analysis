@@ -4,9 +4,11 @@ Basic modeling with Real-World Data.
 
 <img src="figures/survival_by_age.png" alt="Violin plot demonstrating that COVID survival correlates with age at time of hospitalization." width="500px" />
 
+Author: [Zachary Levonian](https://github.com/levon003)
+
 ### Data
 
-The data is a sample of research data provided by ConcertAI. I don't have permission to share it publicly. Note that all PII is random in the data (e.g. names and addresses are random).
+The data is a representative but fabricated sample of research data provided by [ConcertAI](https://www.concertai.com/). I don't have permission to share it publicly. Note that all PII is random in the data (e.g. names and addresses are random).
 
 The structure of the data is visible in the analysis notebooks, and a sample is contained in the test resources (`tests/resources/`).
 
