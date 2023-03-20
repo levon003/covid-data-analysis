@@ -2,7 +2,7 @@
 
 Basic modeling with Real-World Data.
 
-<img src="figures/survival_by_age.png" alt="Violin plot demonstrating that COVID survival correlates with age at time of diagnosis." style="width: auto; height: 50vh" />
+<img src="figures/survival_by_age.png" alt="Violin plot demonstrating that COVID survival correlates with age at time of hospitalization." style="max-width: 10%; max-height: 50vh; height: auto; width: auto" />
 
 ### Data
 
