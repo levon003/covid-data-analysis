@@ -21,5 +21,5 @@ install-poetry:
 	# TODO verify installation
 
 install-precommits:
-	@poetry run pre-commit install
-	@pre-commit autoupdate
+	@poetry run pre-commit autoupdate
+	@poetry run pre-commit install --overwrite --install-hooks
