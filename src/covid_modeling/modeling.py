@@ -1,6 +1,7 @@
 import warnings
 
 import numpy as np
+import pandas as pd
 import sklearn
 import sklearn.linear_model
 import sklearn.model_selection
@@ -9,15 +10,30 @@ from tqdm import tqdm
 
 
 def fit_predict_logit(
-    train_df,
-    test_df,
-    formula="covid_death ~ gender + race + age",
-    l2=False,
-):
-    """
-    Fits a logistic regression model given the train/test dataframes and a particular formula.
+    train_df: pd.DataFrame,
+    test_df: pd.DataFrame,
+    formula: str = "covid_death ~ gender + race + age",
+    l2: bool = False,
+) -> tuple:
+    """Fits a logistic regression model given the train/test dataframes and a particular formula.
 
     If L2 regularization is active, we use sklearn rather than statsmodels.
+
+    Parameters
+    ----------
+    train_df : pd.DataFrame
+        _description_
+    test_df : pd.DataFrame
+        _description_
+    formula : str, optional
+        _description_, by default "covid_death ~ gender + race + age"
+    l2 : bool, optional
+        _description_, by default False
+
+    Returns
+    -------
+    tuple
+        The predictions and the model object.
     """
     md = smf.logit(formula=formula, data=train_df)
     if not l2:

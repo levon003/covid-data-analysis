@@ -5,5 +5,3 @@ max-line-length = 120
 
 # E203: Whitespace before ':'
 # E501: Line too long
-# W503: Line break occurred before binary operator
-# E226: Missing white space around arithmetic operator

@@ -19,6 +19,7 @@ statsmodels = ">=0.13"
 matplotlib = ">=3"
 python-dateutil = ">=2.8"
 debugpy = "^1.6.6"
+tqdm = ">=4.65"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.12.0"
