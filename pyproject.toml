@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "covid_modeling"
+version = "0.1.0"
+description = "Local package to assist with modeling."
+authors = [
+    "Zachary Levonian <levon003@umn.edu>"
+]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "covid_modeling", from = "src"}]
+repository = "https://github.com/levon003/covid-data-analysis.git"
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+numpy = ">=1.22"
+pandas = ">=1.4"
+scikit-learn = ">=1.0"
+statsmodels = ">=0.13"
+matplotlib = ">=3"
+python-dateutil = ">=2.8"
+debugpy = "^1.6.6"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+isort = "^5.12"
+flake8 = "^6.0.0"
+nbqa = "^1.6.0"
+pre-commit = "^2.21.0"
+jupyter = "^1.0.0"
+pytest = "^7.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+/(
+      .eggs         # exclude a few common directories in the
+    | .git          # root of the project
+    | .github
+    | .gitignore
+    | .hg
+    | .mypy_cache
+    | .tox
+    | .venv
+    | venv
+    | _build
+    | buck-out
+    | build
+    | ci
+    | data
+    | dist
+    | docs
+    | docsrc
+  )/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 79
+multi_line_output = 3
+include_trailing_comma = true
+virtual_env = "venv"
