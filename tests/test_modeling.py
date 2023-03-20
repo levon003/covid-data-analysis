@@ -53,3 +53,9 @@ def test_evaluate_models():
     ).all(), "Every model should have been fit twice (with and without l2)"
     assert (result_df.loc[result_df.model_name == "b_only", "f1"] >= 0.8).all()
     assert (result_df.loc[result_df.model_name == "a_only", "f1"] < 0.6).all()
+
+
+def test_evaluate_models_exception():
+    df = get_feature_df(10, 10)
+    formula_list = [("test", "target ~ b")]
+    _ = covid_modeling.modeling.evaluate_models(df, formula_list, target_name="target")

@@ -28,4 +28,4 @@ install-precommits:
 	@poetry run pre-commit install --overwrite --install-hooks
 
 test:
-	@poetry run pytest
+	@poetry run pytest --cov --cov-fail-under 100 --cov-report term-missing

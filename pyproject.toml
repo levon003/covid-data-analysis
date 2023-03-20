@@ -29,6 +29,7 @@ nbqa = "^1.6.0"
 pre-commit = "^2.21.0"
 jupyter = "^1.0.0"
 pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
 
 [build-system]
 requires = ["poetry-core"]
