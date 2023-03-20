@@ -1,10 +1,10 @@
 POETRY_HOME := ${HOME}/.local/bin
 export PATH := ${POETRY_HOME}:$(PATH)
 
-.PHONY: help install ensure-poetry install-poetry install-precommits
+.PHONY: help install ensure-poetry install-poetry install-precommits test
 
 help:
-	@echo "TODO write help text"
+	@echo "Relevant targets are 'install' and 'test'."
 
 install:
 	@$(MAKE) ensure-poetry
