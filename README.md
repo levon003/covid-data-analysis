@@ -1,2 +1,6 @@
-# covid-data-analysis
-Basic modeling with COVID data; a good demonstration of my approach to data science.
+# COVID-19 Data Analysis
+
+Basic modeling with Real-World Data.
+
+The data is a sample of research data provided by ConcertAI. I don't have permission to share it publicly.
+
