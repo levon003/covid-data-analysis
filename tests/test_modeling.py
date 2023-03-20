@@ -1,3 +1,5 @@
+from unittest import mock
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -55,7 +57,14 @@ def test_evaluate_models():
     assert (result_df.loc[result_df.model_name == "a_only", "f1"] < 0.6).all()
 
 
+def fit_predict_logit_broken():
+    raise Exception("Test")
+
+
+@mock.patch("covid_modeling.modeling.fit_predict_logit", new=fit_predict_logit_broken)
 def test_evaluate_models_exception():
     df = get_feature_df(10, 10)
     formula_list = [("test", "target ~ b")]
-    _ = covid_modeling.modeling.evaluate_models(df, formula_list, target_name="target")
+    results = covid_modeling.modeling.evaluate_models(df, formula_list, target_name="target")
+    for result in results:
+        assert result["f1"] == 0.0
