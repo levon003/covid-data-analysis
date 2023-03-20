@@ -1,12 +1,14 @@
 POETRY_HOME := ${HOME}/.local/bin
 export PATH := ${POETRY_HOME}:$(PATH)
 
-.PHONY: help
+.PHONY: help install ensure-poetry install-poetry install-precommits
+
 help:
 	@echo "TODO write help text"
 
 install:
 	@$(MAKE) ensure-poetry
+	@$(MAKE) install-precommits
 
 ensure-poetry:
 	@if [ "$(shell which poetry)" = "" ]; then \
@@ -14,6 +16,7 @@ ensure-poetry:
 	else \
 		echo "Found existing Poetry installation at $(shell which poetry)."; \
 	fi
+	@poetry install
 
 install-poetry:
 	@echo "Installing Poetry..."
