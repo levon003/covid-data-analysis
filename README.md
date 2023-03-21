@@ -6,6 +6,18 @@ Basic modeling with Real-World Data.
 
 Author: [Zachary Levonian](https://github.com/levon003)
 
+### Structure
+
+A good entrypoint to the analyisis is [the Jupyter notebook that explores the dataset](/notebook/DataExploration.ipynb) or [the Jupyter notebook that analyses the data by fitting multiple logistic regression models](/notebook/DataModeling.ipynb).
+
+Otherwise, the directory layout is:
+
+- `notebook` contains the analysis notebooks.
+- `src` contains the `covid_modeling` Python package with helper functions and classes to support the analysis.
+- `tests` contains `pytest` tests for the `covid_modeling` package.
+- `data` is presumed to be the location of the input data... see the Data section below for more details.
+- `figures` contains any images produced within the analysis notebooks.
+
 ### Data
 
 The data is a representative but fabricated sample of research data provided by [ConcertAI](https://www.concertai.com/). I don't have permission to share it publicly. Note that all PII is random in the data (e.g. names and addresses are random).
