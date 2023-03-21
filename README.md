@@ -6,9 +6,9 @@ Basic modeling with Real-World Data.
 
 Author: [Zachary Levonian](https://github.com/levon003)
 
-### Structure
+### Repository Structure
 
-A good entrypoint to the analyisis is [the Jupyter notebook that explores the dataset](/notebook/DataExploration.ipynb) or [the Jupyter notebook that analyses the data by fitting multiple logistic regression models](/notebook/DataModeling.ipynb).
+A good entrypoint to this analyisis is [the Jupyter notebook that explores the dataset](/notebook/DataExploration.ipynb) or [the Jupyter notebook that analyses the data by fitting multiple logistic regression models](/notebook/DataModeling.ipynb).
 
 Otherwise, the directory layout is:
 
