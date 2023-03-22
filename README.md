@@ -1,5 +1,7 @@
 # COVID-19 Data Analysis
 
+[![License](https://img.shields.io/github/license/levon003/covid-data-analysis)](https://github.com/levon003/covid-data-analysis/blob/main/LICENSE)
+
 Basic modeling with Real-World Data.
 
 <img src="figures/survival_by_age.png" alt="Violin plot demonstrating that COVID survival correlates with age at time of hospitalization." width="500px" />
